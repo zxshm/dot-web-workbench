@@ -1,0 +1,11 @@
+node_modules/
+data/
+runtime/
+__pycache__/
+*.log
+.env
+config.json
+public/rich.js
+public/rich.css
+public/fonts/
+*.dpapi

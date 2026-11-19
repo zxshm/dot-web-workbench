@@ -1,0 +1,20 @@
+{
+  "port": 4190,
+  "mcpPort": 4191,
+  "callerThreadId": "",
+  "pipePrefix": "codex-app-tools-",
+  "projectId": "",
+  "projectName": "",
+  "defaultEmail": "",
+  "tunnel": {
+    "id": "",
+    "organizationId": "",
+    "clientPath": "",
+    "proxy": ""
+  },
+  "smtp": {
+    "host": "",
+    "port": 465,
+    "username": ""
+  }
+}

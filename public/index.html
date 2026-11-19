@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Dot 网页工作台</title><link rel="stylesheet" href="/rich.css"><link rel="stylesheet" href="/style.css"></head>
+<body>
+<aside id="sidebar">
+  <div class="sidebar-heading"><strong>对话</strong><button id="close-sidebar" aria-label="收起对话列表">关闭</button></div>
+  <select id="scope" aria-label="会话所属范围"><option value="workbench-project">选定项目</option><option value="projectless" selected>无项目</option></select>
+  <button id="new-chat" class="new-chat">＋ 新建对话</button>
+  <input id="search" class="search" placeholder="搜索对话" aria-label="搜索对话">
+  <div class="list-heading"><span>对话 <span id="count">0</span></span><button id="refresh" title="刷新对话列表" aria-label="刷新客户端对话">刷新</button></div>
+  <nav id="conversation-list" aria-label="项目对话列表"></nav>
+  <div class="sidebar-bottom"><button id="connection">设置</button><span><i id="desktop-dot" class="status-dot"></i><span id="desktop-status">连接中</span></span></div>
+</aside>
+<button id="sidebar-backdrop" aria-label="关闭对话列表" tabindex="-1"></button>
+<main>
+  <header><button id="menu" aria-label="展开对话列表">☰</button><h1 id="chat-title">新对话</h1><div class="header-actions"><span id="dot-status">Dot 待连接</span><button id="export" disabled title="导出本程序记录">导出</button></div></header>
+  <div id="notice" role="status"></div>
+  <section id="messages" aria-label="本程序聊天记录" aria-live="polite"><div class="empty"><h2>新对话</h2><p>直接输入消息，或选择左侧对话继续。</p></div></section>
+  <div class="compose-area">
+    <form id="composer">
+      <div id="attachments" class="attachments"></div>
+      <textarea id="message" placeholder="输入消息…" aria-label="消息内容" rows="2"></textarea>
+      <div class="compose-toolbar"><div class="compose-options">
+        <button type="button" id="add-file" title="单个文件不超过 50 MB">添加文件</button><input id="file-input" type="file" multiple hidden>
+        <select id="model" aria-label="模型" title="模型"></select><select id="effort" aria-label="推理强度" title="推理强度"></select>
+      </div><button type="submit" id="send">发送</button></div>
+    </form>
+    <div class="compose-footer"><label><input id="notify" type="checkbox" checked> 邮件通知</label><input id="email" type="email" list="email-options" aria-label="通知邮箱" placeholder="填写或修改通知邮箱" title="邮箱和开关同步到各端；取消勾选会停止尚未发出的通知"><span id="email-save-status" role="status" class="meta" aria-live="polite"></span><datalist id="email-options"></datalist><span class="keyboard-hint">Enter 发送 · Shift + Enter 换行</span></div>
+  </div>
+</main>
+<dialog id="connection-dialog"><h2>设置</h2><fieldset class="history-settings"><legend>对话列表</legend><label><input id="show-used" type="checkbox"> 仅显示本程序有记录的对话</label><label><input id="show-archived" type="checkbox"> 显示归档对话</label></fieldset><div id="connection-details"></div><details><summary>连接说明</summary><ol><li>打开本机 Codex，保持账户登录。</li><li>将本程序的独立 MCP 端点通过 Secure MCP Tunnel 连接到你的 Dot。</li><li>在Dot中订阅“工作台请求”事件，让它读取并转交新请求。</li></ol><p>Dot 尚未连接时，消息会保存在本机等待接收。程序不会把排队状态显示成已送达。</p><p>本机记录位于 <code>data/</code>。邮件使用自行配置的 SMTP 账户；邮件状态“服务器已接收”不等于已进入收件箱。</p><form id="tunnel-form"><label>独立隧道运行密钥<input id="tunnel-key" type="password" autocomplete="off" placeholder="只在首次连接时填写" aria-label="独立隧道运行密钥"></label><p>密钥由 Windows 加密，保存在当前用户目录；重新打开程序会自动恢复连接。</p><button type="submit" class="primary">保存并连接隧道</button><p id="tunnel-result" role="status"></p></form></details><div class="dialog-actions"><button id="close-connection" class="primary">完成</button></div></dialog>
+<div id="toast" role="alert"></div><script type="module" src="/app.js"></script>
+</body></html>
